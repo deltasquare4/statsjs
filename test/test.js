@@ -128,6 +128,20 @@ describe('#linReg()', function() {
 		expect(reg.yIntercept).to.be.within(.00001).of(3.61352);
 		expect(reg.r).to.be.within(.000001).of(-.693356);
 	});
+
+	it('should not return NaN if the y coordinate values are same', function() {
+		var reg1 = stats([
+			{ x: 1,  y: 4 },
+			{ x: 3,  y: 4 },
+			{ x: 6,  y: 4 },
+			{ x: 4,  y: 4 },
+			{ x: 9,  y: 4 },
+		]).linReg();
+
+		expect(reg1.slope).to.eql(0);
+		expect(reg1.yIntercept).to.eql(4);
+		expect(reg1.r).to.eql(0);
+	});
 });
 
 describe('#powReg()', function() {
